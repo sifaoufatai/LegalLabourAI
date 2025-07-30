@@ -168,7 +168,7 @@ custom_prompt = PromptTemplate(
     """,
     input_variables=["question", "context", "chat_history"]
 
-
+)
 try:
     custom_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
