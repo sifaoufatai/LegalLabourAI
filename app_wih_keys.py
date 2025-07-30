@@ -200,15 +200,16 @@ def handle_user_interaction():
             st.session_state.chat_history.append((cleaned_question, result["answer"]))
             st.write(result["answer"])
             # display context
-            if relevant_docs:
-                st.write("**Context used :**")
-                for doc in relevant_docs:
-                    st.write(doc.page_content)
-
-                    st.write("**references :**")
-                    for key, value in doc.metadata.items():
-                        st.write(f"{key}: {value}")
-                    st.write("---"*40)
+           if relevant_docs:
+                        with st.expander("Afficher le contexte utilisé et les références"):
+                            for doc in relevant_docs:
+                                st.write(doc.page_content)
+                                st.write("**Références :**")
+                                for key, value in doc.metadata.items():
+                                    st.write(f"{key}: {value}")
+                                st.write("---" * 40)
+                    else:
+                        st.write("No context found.")
             else:
                 st.write("No context found.")
 
