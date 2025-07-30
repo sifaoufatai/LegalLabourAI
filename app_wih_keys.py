@@ -221,10 +221,11 @@ def display_chat_history_sidebar():
     """
     with st.sidebar:
         if st.session_state.chat_history:
-            st.markdown("### Conversation History:")
-            for q, a in st.session_state.chat_history:
-                st.markdown(f"**You:** {q}")
-                st.markdown(f"**Assistant:** {a}")
+            with st.expander("Conversation History : "):
+
+                for q, a in st.session_state.chat_history:
+                    st.markdown(f"**You:** {q}")
+                    st.markdown(f"**Assistant:** {a}")
 
 handle_user_interaction()
 display_chat_history_sidebar()
