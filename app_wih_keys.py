@@ -173,7 +173,8 @@ try:
         retriever=vector_db.as_retriever(),
         memory=memory,
         combine_docs_chain_kwargs={"prompt": custom_prompt},
-        return_source_documents = True
+        return_source_documents = True,
+        output_key="answer"
     )
 except Exception as e:
     st.error(f"Error creating conversational chain: {e}")
