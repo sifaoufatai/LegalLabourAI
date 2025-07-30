@@ -1,6 +1,7 @@
 streamlit
 langchain
-langchain_community
+langchain-community
 chromadb
-ollama
-huggingface_hub
+huggingface-hub
+sentence-transformers
+python-dotenv
