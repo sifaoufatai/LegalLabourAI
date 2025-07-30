@@ -1,3 +1,9 @@
+import sys
+import os
+
+if "pysqlite3" in sys.modules or os.environ.get("PYTHON_PYSQLITE3"):
+    import pysqlite3
+    sys.modules["sqlite3"] = pysqlite3
 import streamlit as st
 from langchain_community.vectorstores import Chroma
 
