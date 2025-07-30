@@ -201,18 +201,16 @@ def handle_user_interaction():
             st.write(result["answer"])
             # display context
             if relevant_docs:
-                        with st.expander("Afficher le contexte utilisé et les références"):
-                            for doc in relevant_docs:
-                                st.write(doc.page_content)
-                                st.write("**Références :**")
-                                for key, value in doc.metadata.items():
-                                    st.write(f"{key}: {value}")
-                                st.write("---" * 40)
-                    else:
-                        st.write("No context found.")
+                with st.expander(
+                        "Afficher le contexte utilisé et les références"):
+                    for doc in relevant_docs:
+                        st.write(doc.page_content)
+                        st.write("**Références :**")
+                        for key, value in doc.metadata.items():
+                            st.write(f"{key}: {value}")
+                        st.write("---" * 40)
             else:
                 st.write("No context found.")
-
 
         except Exception as e:
             st.error(f"Error generating response: {e}")
