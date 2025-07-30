@@ -172,7 +172,8 @@ try:
         llm=llm,
         retriever=vector_db.as_retriever(),
         memory=memory,
-        combine_docs_chain_kwargs={"prompt": custom_prompt}
+        combine_docs_chain_kwargs={"prompt": custom_prompt},
+        return_source_documents = True
     )
 except Exception as e:
     st.error(f"Error creating conversational chain: {e}")
