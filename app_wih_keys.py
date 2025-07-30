@@ -204,6 +204,8 @@ def handle_user_interaction():
                 st.write("**Context used :**")
                 for doc in relevant_docs:
                     st.write(doc.page_content)
+                    print("-" * 40)
+                    st.write("**references :**", doc.metadata)
             else:
                 st.write("No context found.")
 
