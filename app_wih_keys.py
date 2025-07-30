@@ -200,7 +200,7 @@ def handle_user_interaction():
             st.session_state.chat_history.append((cleaned_question, result["answer"]))
             st.write(result["answer"])
             # display context
-           if relevant_docs:
+            if relevant_docs:
                         with st.expander("Afficher le contexte utilisé et les références"):
                             for doc in relevant_docs:
                                 st.write(doc.page_content)
