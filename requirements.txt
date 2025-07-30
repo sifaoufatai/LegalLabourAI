@@ -7,3 +7,4 @@ sentence-transformers
 python-dotenv
 openai
 pysqlite3-binary
+langchain-mistralai
