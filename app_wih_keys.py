@@ -158,31 +158,27 @@ custom_prompt = PromptTemplate(
     Chat History:
     {chat_history}
 
-    User question:  
+    User question:
     {question}
 
-    Context (excerpts from the Labour Code):  
+    Context (excerpts from the Labour Code):
     {context}
 
     Answer:
     """,
     input_variables=["question", "context", "chat_history"]
-    # Ajout de chat_history
-)
+
 
 try:
     custom_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         retriever=vector_db.as_retriever(),
         memory=memory,
-        combine_docs_chain_kwargs={"prompt": custom_prompt},
-        return_source_documents=True,
-        output_key="answer"
+        combine_docs_chain_kwargs={"prompt": custom_prompt}
     )
 except Exception as e:
     st.error(f"Error creating conversational chain: {e}")
     st.stop()
-
 
 def handle_user_interaction():
     """
@@ -192,44 +188,29 @@ def handle_user_interaction():
     if user_input:
         cleaned_question = clean_text(user_input)
         try:
+            # source
+            retriever = vector_db.as_retriever()
+            relevant_docs = retriever.get_relevant_documents(cleaned_question)
+
             result = custom_chain({
                 "question": cleaned_question,
                 "chat_history": st.session_state.chat_history
             })
-
-            st.session_state.chat_history.append(
-                (cleaned_question, result["answer"]))
-
-            # Afficher la réponse
-            st.write("**Réponse:**")
+            # display answer
+            st.session_state.chat_history.append((cleaned_question, result["answer"]))
             st.write(result["answer"])
-
-            # Afficher le contexte des documents sources
-            if "source_documents" in result and result["source_documents"]:
-                st.write("**Context utilisé:**")
-                for i, doc in enumerate(result["source_documents"]):
-                    with st.expander(f"Document {i + 1}"):
-                        st.write("**Contenu:**")
-                        st.write(doc.page_content)
-                        if hasattr(doc, 'metadata') and doc.metadata:
-                            st.write("**Métadonnées:**")
-                            st.json(doc.metadata)
+            # display context
+            if relevant_docs:
+                st.write("**Context used :**")
+                for doc in relevant_docs:
+                    st.write(doc.page_content)
             else:
-                st.write("**Context utilisé:** Aucun contexte trouvé.")
+                st.write("No context found.")
 
-            # Debug pour voir toutes les clés disponibles
-            st.write("**Debug - Clés disponibles:**", list(result.keys()))
-
-            # Affichage des sources si disponibles (peu probable avec ConversationalRetrievalChain)
-            if result.get("sources"):
-                st.write("**Sources:**")
-                for source in result["sources"]:
-                    st.write(f"- {source}")
 
         except Exception as e:
             st.error(f"Error generating response: {e}")
-            import traceback
-            st.error(f"Détails de l'erreur: {traceback.format_exc()}")
+
 def display_chat_history_sidebar():
     """
     Display the conversation history in the sidebar.
