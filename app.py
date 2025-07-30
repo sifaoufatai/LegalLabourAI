@@ -1,13 +1,14 @@
 import streamlit as st
 from langchain_community.vectorstores import Chroma
 
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.chat_models import ChatOpenAI
 
-
-from langchain.embeddings import HuggingFaceEmbeddings
+#from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import Ollama
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models import ChatOpenAI
+#from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 
 # --- Global variables / constants ---
