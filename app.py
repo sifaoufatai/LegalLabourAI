@@ -1,6 +1,6 @@
 import streamlit as st
-#from langchain_community.vectorstores import Chroma
-from langchain_chroma import Chroma
+from langchain_community.vectorstores import Chroma
+#from langchain_chroma import Chroma
 
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import Ollama

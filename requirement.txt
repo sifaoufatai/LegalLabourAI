@@ -1,9 +1,6 @@
 streamlit
-openai
-tqdm
-pypdf
-sentence-transformers
-chromadb
-python-dotenv
 langchain
-langchain-chroma>=0.2.5
+langchain_community
+chromadb
+ollama
+huggingface_hub
