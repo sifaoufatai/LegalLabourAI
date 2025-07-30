@@ -6,5 +6,5 @@ sentence-transformers
 chromadb
 python-dotenv
 
-# Installation directe depuis GitHub
+# Langchain from GitHub for langchain_community
 git+https://github.com/langchain-ai/langchain.git@master#egg=langchain
