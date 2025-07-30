@@ -194,6 +194,10 @@ def handle_user_interaction():
             st.write(result["answer"])
             st.write("**Context used:**", result.get("context", "No context found."))
             st.write("**Debug result :**", result)
+            if result.get("sources"):
+                st.write("**Sources:**")
+                for source in result["sources"]:
+                    st.write(f"- {source}")
         except Exception as e:
             st.error(f"Error generating response: {e}")
 
