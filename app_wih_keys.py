@@ -193,6 +193,7 @@ def handle_user_interaction():
             st.session_state.chat_history.append((cleaned_question, result["answer"]))
             st.write(result["answer"])
             st.write("**Context used:**", result.get("context", "No context found."))
+            st.write("**Debug result :**", result)
         except Exception as e:
             st.error(f"Error generating response: {e}")
 
