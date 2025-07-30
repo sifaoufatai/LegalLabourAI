@@ -1,6 +1,8 @@
 import sys
 import os
+import pysqlite3
 
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 if "pysqlite3" in sys.modules or os.environ.get("PYTHON_PYSQLITE3"):
     import pysqlite3
     sys.modules["sqlite3"] = pysqlite3
