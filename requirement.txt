@@ -1,8 +1,10 @@
 streamlit
-langchain>=0.1.13
-sentence-transformers
-chromadb
-python-dotenv
 openai
 tqdm
 pypdf
+sentence-transformers
+chromadb
+python-dotenv
+
+# Installation directe depuis GitHub
+git+https://github.com/langchain-ai/langchain.git@master#egg=langchain
